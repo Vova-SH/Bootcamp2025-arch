@@ -1,4 +1,4 @@
-package ru.sicampus.bootcamp.domain
+package ru.sicampus.bootcamp.domain.list
 
 class GetUsersUseCase(
     private val repo: UserRepo

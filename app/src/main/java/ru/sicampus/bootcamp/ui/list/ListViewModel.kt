@@ -6,10 +6,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.sicampus.bootcamp.data.UserNetworkDataSource
-import ru.sicampus.bootcamp.data.UserRepoImpl
-import ru.sicampus.bootcamp.domain.GetUsersUseCase
-import ru.sicampus.bootcamp.domain.UserEntity
+import ru.sicampus.bootcamp.data.auth.AuthStorageDataSource
+import ru.sicampus.bootcamp.data.list.UserNetworkDataSource
+import ru.sicampus.bootcamp.data.list.UserRepoImpl
+import ru.sicampus.bootcamp.domain.list.GetUsersUseCase
+import ru.sicampus.bootcamp.domain.list.UserEntity
 
 class ListViewModel(
     private val getUsersUseCase: GetUsersUseCase
@@ -59,7 +60,8 @@ class ListViewModel(
                 return ListViewModel(
                     getUsersUseCase = GetUsersUseCase(
                         repo = UserRepoImpl(
-                            userNetworkDataSource = UserNetworkDataSource()
+                            userNetworkDataSource = UserNetworkDataSource(),
+                            authStorageDataSource = AuthStorageDataSource
                         )
                     )
                 ) as T

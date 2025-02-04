@@ -4,5 +4,5 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="ru.sicampus.bootcamp.ui.list.ListFragment"
+    android:name="ru.sicampus.bootcamp.ui.auth.AuthFragment"
     tools:context=".ui.MainActivity"/>

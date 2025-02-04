@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Bootcamp2025</string>
     <string name="refresh">Refresh</string>
+    <string name="login_hint">Введите логин</string>
+    <string name="password_hint">Введите пароль</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="hello">Hello!</string>
+    <string name="next">Next</string>
 </resources>

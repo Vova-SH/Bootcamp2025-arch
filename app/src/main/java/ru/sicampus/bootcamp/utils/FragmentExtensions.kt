@@ -16,5 +16,4 @@ fun <T> Flow<T>.collectWithLifecycle(
             collect { function.invoke(it) }
         }
     }
-
 }

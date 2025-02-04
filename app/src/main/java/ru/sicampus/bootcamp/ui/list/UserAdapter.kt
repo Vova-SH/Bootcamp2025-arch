@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.sicampus.bootcamp.databinding.ItemUserBinding
-import ru.sicampus.bootcamp.domain.UserEntity
+import ru.sicampus.bootcamp.domain.list.UserEntity
 
 class UserAdapter : ListAdapter<UserEntity, UserAdapter.ViewHolder>(UserDiff) {
 
