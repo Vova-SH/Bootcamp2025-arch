@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 fun <T> Flow<T>.collectWithLifecycle(
     fragment: Fragment,
-    function: (T) -> Unit
+    function: suspend (T) -> Unit
 ) {
     fragment.viewLifecycleOwner.lifecycleScope.launch {
         fragment.repeatOnLifecycle(Lifecycle.State.STARTED) {

@@ -3,6 +3,9 @@ package ru.sicampus.bootcamp.ui.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -14,43 +17,16 @@ import ru.sicampus.bootcamp.domain.UserEntity
 class ListViewModel(
     private val getUsersUseCase: GetUsersUseCase
 ) : ViewModel() {
-    private val _state = MutableStateFlow<State>(State.Loading)
-    val state = _state.asStateFlow()
-
-    init {
-        updateState()
-    }
-
-    fun clickRefresh() {
-        updateState()
-    }
-
-    private fun updateState() {
-        viewModelScope.launch {
-            _state.emit(State.Loading)
-            _state.emit(
-                getUsersUseCase.invoke().fold(
-                    onSuccess = { data ->
-                        State.Show(data)
-                    },
-                    onFailure = { error ->
-                        State.Error(error.message.toString())
-                    }
-                )
-            )
-        }
-    }
-
-    sealed interface State {
-        data object Loading : State
-        data class Show(
-            val items: List<UserEntity>
-        ) : State
-
-        data class Error(
-            val text: String
-        ) : State
-    }
+    val listState = Pager(
+        config = PagingConfig(
+            pageSize = 10,
+            enablePlaceholders = false,
+            maxSize = 30
+        )
+    ) {
+        ListPagingSource(getUsersUseCase::invoke)
+    }.flow
+        .cachedIn(viewModelScope)
 
     companion object {
         val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
